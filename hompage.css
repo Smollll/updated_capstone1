@@ -1,0 +1,848 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+body{
+    background:linear-gradient(180deg, #C8C1AC,#FFE794);
+    min-height: 100vh;
+    width: 100%;
+    
+}
+/* Navbar */
+.header{
+    width: 100%;
+    height: fit-content;
+}
+.navigation{
+    display: flex;
+    background-color: #1a1a1a;
+    padding: 20px 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links{
+    display: flex;
+    gap: 2rem;
+    margin-inline: 2rem;
+}
+.nav-link{
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: clamp(0.7rem, 1vw, 1.5rem);
+    transition: 0.5s ease;
+}
+.nav-link:hover{
+    color:rgba(255, 255, 255, 1);
+}
+.nav-icons{
+    display: flex;
+    gap: 1rem;
+    margin-right: 2rem;
+}
+.bell-icon:hover{
+    animation: tada 1s;
+}
+@keyframes tada {
+    0% {
+        transform: scale(1);
+    }
+    10%, 20% {
+        transform: scale(0.9) rotate(-3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale(1.1) rotate(3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+@media screen and (max-width: 768px) {
+   .nav-links{
+       margin-inline: 1rem;
+       gap: 1rem;
+   }
+    
+}
+/* Style for the popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    
+}
+.close {
+    top:0;
+    left:0;
+
+    position: absolute;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000000;
+}
+
+.userpicname {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+
+}
+.userpic {
+    width: 50px;
+    height: 50px;
+    margin-top:1rem;
+    background-image: url('dp.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.username {
+    margin-left: 1rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.divider {
+    width: 100%;
+    align-self: center;
+    background-color: #7CBE28;
+    border: none;
+    border-radius: 1rem;
+    height: 0.2rem;
+}
+.settings{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.IconLink{
+    cursor: pointer;
+    text-decoration: none;
+    color: #000000;
+}   
+.editprofile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+.lightdark {
+    width: fit-content;
+    border-radius: 50px;
+    display: flex;
+   gap: 0.5rem;
+}
+.lightdark p{
+    margin-right: 0.2rem;
+
+}
+.light{
+    padding: 5px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 50px;
+    border:none;
+    background: #ffffff;
+    box-shadow: inset 5px 5px 10px #b3b3b3,
+                inset -5px -5px 10px #ffffff;
+}
+.dark{
+    padding: 5px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 50px;
+    border:none;
+    background: #ffffff;
+    box-shadow: inset 5px 5px 10px #b3b3b3,
+                inset -5px -5px 10px #ffffff;
+}
+.sun{
+    border-radius: 50px;
+    margin-right: 0.2rem;
+}   
+.moon{
+    border-radius: 50px;
+}
+.exitdashboard{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+/* Popup Edit */
+.closeandlogo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.Popuplogo span{
+    font-size: clamp(1rem, 1.5vw, 1.75rem);
+    font-weight: 600;
+    font-style: italic;
+}
+.popupEdit{
+    position: fixed;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+}
+.popupEdit.active {
+    display: block;
+}
+.modal-overlay{
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(175, 175, 175, 0); /* White with 80% opacity */
+    backdrop-filter: blur(10px); /* Apply a blur effect */
+    z-index: 999
+}
+.modal-overlay.active {
+    display: block;
+}
+.edit-content{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    width: 100%;
+    max-width: 350px;
+    height: fit-content;
+    background:linear-gradient(180deg, #FFFFFF,#FEFFDF);    
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 3.3px 3.3px 1px #77787A, -3.3px -3.3px 1px #FFFFFF;
+    margin-right: 5rem;
+    margin-left: 5rem;
+}
+.inputs{
+    display: flex;
+}
+.editForm input[type="text"],
+.editForm input[type="email"],
+.editForm input[type="tel"]{
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+}
+.editForm input[type="email"]{
+    width: 200px;
+}
+.editForm input.editable {
+    border-bottom: 1px solid black;
+}
+.userpicnameemail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.Edit-userpic {
+    width: 50px;
+    height: 50px;
+    margin-top:1rem;
+    margin-left: 1rem;
+    background-image: url('dp.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.usernameemail{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    gap: 0.5rem;
+}
+.addressphone{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    gap: 0.5rem;
+}
+.submit-edit{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+.submit-edit button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background:linear-gradient(180deg, #17FF73,#D6EE43);
+    color: #000000;
+    font-weight: 600;
+    box-shadow: 3.6px 3.6px 2px #B5B6B9, -3.6px -3.6px 2px #FFFFFF;
+
+}
+
+/* End of Popup */
+
+/* End of Navbar */
+
+.logo{
+    /* margin-top: 1rem; */
+    text-align: center;
+    font-weight: 600;
+    font-size: clamp(2rem, 2vw, 3rem);
+
+}
+.Agri{
+    background: url(grass.jpg);
+    background-size: contain;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+}
+/* start of content */
+
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Uniform Thumbnail Image Styles */
+.course-thumbnail {
+    padding: 10px;
+    width: 100%;
+    height: 150px; /* Fixed height for uniformity */
+    object-fit:contain; /* Ensures the image covers the area without distortion */
+    border-bottom: 2px solid #eee;
+}
+
+/* Title and Text Styling */
+h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Star Rating Container */
+.star-rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 10px 0;
+}
+.rating-stars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Hide the radio inputs */
+.star-input {
+    display: none;
+}
+
+/* Styling for star labels */
+.star-label {
+    display: inline-block;
+    width: 24px; /* Adjust width based on your icon size */
+    height: 24px; /* Adjust height based on your icon size */
+    cursor: pointer;
+    fill: transparent; /* Transparent fill to allow changing star color */
+    position: relative; /* Position relative for absolute positioning of half-star */
+}
+
+/* Default star color */
+.star-label svg path {
+    fill: #ccc; /* Color for empty star */
+}
+
+/* Style for full stars */
+.star-label.full svg path {
+    fill: #ffb633; /* Color for filled star */
+}
+
+/* Style for half stars */
+.star-label.half svg path {
+    fill: #ffb633; /* Color for filled star */
+    clip-path: inset(0 50% 0 0); /* Clip the half star icon to show half only */
+}
+
+/* Positioning for half star */
+.star-label.half::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; /* Adjust width to show the shade to the right */
+    height: 100%;
+  
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .courses-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .folder {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .courses-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .folder {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* Media query for screen sizes 762px and below */
+@media (max-width: 762px) {
+    .box2-content{
+        flex-direction: column;
+        align-items: center;
+    }
+    .content {
+        flex-direction: column; /* Stack boxes vertically */
+        margin-top: 2rem;
+    }
+    .box1 {
+        margin-top: 2rem;
+        order: 2; /* Ensure box1 is on top */
+        width: 100%;/* Adjust width to fit the container */
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 1rem; /* Add bottom margin for spacing */
+        height:fit-content;
+    }
+    .box1-buttons{
+        flex-direction: row;
+        justify-content: center;
+    }
+    .box2 {
+        order: 1; /* Ensure box2 is below box1 */
+        width: 100%; /* Adjust width to fit the container */
+    }
+    
+}
+
+
+
+/*modal */
+
+/* Modal Styles */
+/* General Modal Styling */
+
+/* General Styles */
+/* General Styles */
+* {
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Search */
+.search-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    margin-top: 5%;
+}
+
+.wrap {
+    position: relative;
+    width: 100%; 
+    display: flex;
+    align-items: center; 
+
+    
+}
+
+#search-box {
+    width: calc(100% - 50px);
+    padding: 10px 40px 10px 10px; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+box-icon#search-icon {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+box-icon#search-icon:hover {
+    color: #45a049;
+}
+
+/* Course Box */
+.course-box {
+    background-color: #E8E8E8;
+    border-radius: 8px;
+    padding: 20px;
+    margin: auto;
+    width: 100%;
+    text-align: left;
+    flex-grow: 1; /* Push course box to the bottom */
+    box-shadow: inset 0px 8px 10px -8px rgba(0, 0, 0, 0.5), 
+                inset 0px -8px 10px -8px rgba(0, 0, 0, 0.5); 
+}
+.courses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 25px;
+}
+
+.course-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Force shadow */
+}
+
+
+.folder {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%; 
+    margin: 1%;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.folder:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Styles */
+
+/* small phones */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 10px; 
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rating {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .enroll-button {
+        width: 80%;
+        margin: 20px auto;
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .courses-container {
+        grid-template-columns: 1fr; 
+    }
+    .close {
+        margin-left: 86%;
+        margin-top: 5.5%;
+    }
+
+}
+
+/* phones */
+@media (min-width: 481px) and (max-width: 768px) {
+    .modal-content {
+        width: 80%; 
+    }
+
+    .enroll-button {
+        width: 60%;
+        margin: 20px auto;
+        font-size: 15px;
+        padding: 9px 18px;
+    }
+
+    .courses-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* tablets */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .modal-content {
+        width: 60%; 
+    }
+
+    .enroll-button {
+        width: 40%;
+        margin: 20px auto;
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .courses-container {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+
+    .close {
+        margin-left: 75.5%;
+        margin-top: 5.5%;
+    }
+}
+
+@media (min-height: 800px) and (max-height: 801px) {
+    .close {
+        margin-left: 67%;
+        margin-top: 5.5%;
+    }
+}
+
+/* monitor */
+@media (min-width: 1025px) {
+    .modal-content {
+        width: 40%; 
+    }
+
+    .enroll-button {
+        width: 200px; 
+        margin: 20px auto;
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .courses-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1900px) {
+   .close{
+       margin-left: 61%;
+   }
+}
+
+.rec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.probox {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 50px auto;
+    width: 90%;
+    min-height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Dropdown Container */
+.dropdown {
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    position: relative;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 200px;
+    top: 100%; 
+    margin-top: 5px;
+    right: 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: rgba(220, 220, 220, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+    animation: fadeInSlideDown 0.3s forwards;
+}
+
+/* Keyframes for animation */
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-option {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    font-size: larger;
+    color: #131A39;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+.dropdown-option:hover {
+    background-color: #ffffff;
+    color: #000;
+}
+
+/* Sort Icon */
+.sortIcon {
+    cursor: pointer;
+    font-size: 24px;
+    color: #4CAF50;
+    transition: color 0.3s ease;
+}
+
+.sortIcon:hover {
+    color: #45a049;
+}
+
+
+
+/* small phones */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 10px; 
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rating {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .enroll-button {
+        width: 80%;
+        margin: 20px auto;
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .courses-container {
+        grid-template-columns: 1fr; 
+    }
+    .close {
+        margin-left: 86%;
+        margin-top: 5.5%;
+    }
+
+}
+
+
